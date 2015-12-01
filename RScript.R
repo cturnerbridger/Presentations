@@ -94,3 +94,4 @@ dbRemoveTable(myDB,"iris")
 
 # Politeness ----
 dbDisconnect(myDB)
+```
