@@ -46,8 +46,8 @@ ggplot(dblayout
 Database drivers interface with the DBMS programmatically
 
 - Native drivers are often the fastest but tend to be more restricted to OS
-- Open Database Protocol Client (ODBC) is very common and more portable
-- Java Database Protocol Client (JDBC) is less common but sometimes required
+- Open Database Protocol Client (ODBC) is very common and more portable. Slow
+- Java Database Protocol Client (JDBC) is less common but sometimes required. Slower
 
 > You need the right driver for your database  
 > You may need to consider 32 or 64-bit
@@ -62,6 +62,12 @@ Good for:
 - use as a local cache for IoT and offline apps
 - unchanging schema
 - storage of intermediate results
+
+Not so good for:
+
+- Data Loss (difficult to change / modify tables)
+- Security
+- Reliability
 
 ## Other databases (RDBMS')
 Other databases like SQL Server, MySQL, Oracle have a greater footprint than SQLite.
@@ -124,7 +130,7 @@ head(aq)
 # D[X]L
 
 ## Data Definition Lanuage (DDL)
-DDL describes SQL keywords that allow you to manage the structures data is held in.
+DDL describes SQL keywords that allow you to manage the structures data is held in. Note: owing to likely database restrictions you will not be able to do much, if any, of this.
 
 Examples include:
 
@@ -133,8 +139,10 @@ Examples include:
 - `DROP TABLE`
 - `CREATE INDEX`
 
+Point on 'Create Index': it is worth understanding and taking time to understand indexing in data.tables to make your queries faster.
+
 ## Data Manipulation Language (DML)
-DML describes SQL keywords that allow you to manage the data itself. CRUD covers the main operations.
+DML describes SQL keywords that allow you to manage the data itself. CRUD covers the main operations. This is what you will likely be doing.
 
 ## What’s CRUD?
 
@@ -248,7 +256,8 @@ identical(aqG,aqSQL)
 ## UPDATE | About
 The UPDATE allows you to change values of a records within a table
 
-* Use a WHERE to restrict the UPDATE to only rows you want to amend
+* Use a WHERE to restrict the UPDATE to only rows you want to amend. Even if the WHERE is [1=1], the reason for this is that it builds in an important habbit.
+* * side point: STAR Schema: used to preserve granularity when you collect data into one table. For example, the NULL return may be set as different negitive numbers for different reasons (i.e. no name, no postcode, no credit card...)
 
 ## UPDATE | Example
 ```sql
@@ -548,6 +557,8 @@ Covered a lot of syntax, but not covered everything:
 4. Best practices
 
 Get this slidedeck: [github.com/mangothecat/mangopresentations](https://github.com/MangoTheCat/MangoPresentations/blob/master/presentations/WorkingWithDatabases.Rmd)
+
+Overview: it is useful to filter data in your SQL queries, then, if possible, pull that data into your memory and manipulate in R using the data.table package.
 
 ## Q&A
 
