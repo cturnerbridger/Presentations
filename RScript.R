@@ -1,9 +1,3 @@
-# ---
-# title: "Working with databases"
-# author: "Steph Locke"
-# date: "30/11/2015"
-# type: "Exercise answers"
-# ---
 if(file.exists("local.db")) file.remove("local.db")
 # Exercise 1 ----
 library(RSQLite)
